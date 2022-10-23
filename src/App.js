@@ -1,25 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
-function App() {
+import Sidebar from './Components/Sidebar';
+import { SidebarData } from "./Components/SidebarData"
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Sidebar />
+
+        <div className='MainApp'>
+          <Routes>
+            {
+              SidebarData.map((val, key) => {
+                return (
+                  <Route key={key} path={val.link} element={val.element} />
+                )
+              })
+            }
+          </Routes>
+        </div>
+      </Router>
     </div>
   );
 }
-
-export default App;
